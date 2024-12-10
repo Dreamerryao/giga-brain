@@ -1,0 +1,15 @@
+.anchor
+.DS_Store
+target
+**/*.rs.bk
+node_modules
+test-ledger
+.yarn
+node_modules
+tmp
+
+# Ignore all .env files
+.env*
+
+# Don't ignore .env.example
+!.env.example

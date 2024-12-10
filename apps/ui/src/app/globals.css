@@ -1,0 +1,313 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+  font-family: 'Space Grotesk', Arial, Helvetica, sans-serif;
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+}
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 240 10% 3.9%;
+    --card: 0 0% 100%;
+    --card-foreground: 240 10% 3.9%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 240 10% 3.9%;
+    --primary: 240 5.9% 10%;
+    --primary-foreground: 0 0% 98%;
+    --secondary: 240 4.8% 95.9%;
+    --secondary-foreground: 240 5.9% 10%;
+    --muted: 240 4.8% 95.9%;
+    --muted-foreground: 240 3.8% 46.1%;
+    --accent: 240 4.8% 95.9%;
+    --accent-foreground: 240 5.9% 10%;
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 5.9% 90%;
+    --input: 240 5.9% 90%;
+    --ring: 240 10% 3.9%;
+    --chart-1: 12 76% 61%;
+    --chart-2: 173 58% 39%;
+    --chart-3: 197 37% 24%;
+    --chart-4: 43 74% 66%;
+    --chart-5: 27 87% 67%;
+    --radius: 0.5rem;
+  }
+  .dark {
+    --background: 240 10% 3.9%;
+    --foreground: 0 0% 98%;
+    --card: 240 10% 3.9%;
+    --card-foreground: 0 0% 98%;
+    --popover: 240 10% 3.9%;
+    --popover-foreground: 0 0% 98%;
+    --primary: 0 0% 98%;
+    --primary-foreground: 240 5.9% 10%;
+    --secondary: 240 3.7% 15.9%;
+    --secondary-foreground: 0 0% 98%;
+    --muted: 240 3.7% 15.9%;
+    --muted-foreground: 240 5% 64.9%;
+    --accent: 240 3.7% 15.9%;
+    --accent-foreground: 0 0% 98%;
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 0 0% 98%;
+    --border: 240 3.7% 15.9%;
+    --input: 240 3.7% 15.9%;
+    --ring: 240 4.9% 83.9%;
+    --chart-1: 220 70% 50%;
+    --chart-2: 160 60% 45%;
+    --chart-3: 30 80% 55%;
+    --chart-4: 280 65% 60%;
+    --chart-5: 340 75% 55%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+
+  :root {
+    --game-gradient: linear-gradient(135deg, #ff3366 0%, #ff6b6b 100%);
+    --game-glow: 0 0 20px rgba(255, 51, 102, 0.5);
+  }
+
+  body {
+    @apply bg-zinc-950 text-white font-sans overflow-x-hidden;
+    background-image: radial-gradient(
+        circle at 25% 0%,
+        rgba(255, 51, 102, 0.15) 0%,
+        transparent 50%
+      ),
+      radial-gradient(
+        circle at 75% 100%,
+        rgba(255, 107, 107, 0.1) 0%,
+        transparent 50%
+      ),
+      url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23FF3366' fill-opacity='0.02'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+  }
+
+  ::-webkit-scrollbar {
+    @apply w-2;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-zinc-900 rounded-full;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-rose-500/50 rounded-full hover:bg-rose-500/70 transition-colors;
+  }
+}
+
+@layer components {
+  .cyber-button {
+    @apply relative overflow-hidden transition-all duration-300 text-lg font-bold px-8 py-3
+           bg-transparent border-2 border-rose-500/50 text-rose-400
+           hover:border-rose-400 hover:!text-rose-300 transform hover:scale-105 hover:!bg-transparent;
+    box-shadow:
+      inset 0 0 20px rgba(255, 51, 102, 0.2),
+      0 0 20px rgba(255, 51, 102, 0.2);
+  }
+
+  .cyber-button::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(255, 51, 102, 0.1) 50%,
+      transparent 100%
+    );
+  }
+
+  .cyber-button:hover {
+    box-shadow:
+      inset 0 0 30px rgba(255, 51, 102, 0.3),
+      0 0 30px rgba(255, 51, 102, 0.3);
+  }
+
+  .game-card {
+    @apply relative overflow-hidden transition-all duration-500 rounded-3xl;
+    background: linear-gradient(
+      165deg,
+      rgba(255, 51, 102, 0.1),
+      rgba(0, 0, 0, 0)
+    );
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 0 0 1px rgba(255, 51, 102, 0.1);
+    transform-style: preserve-3d;
+  }
+
+  /* .game-card::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-500;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(255, 51, 102, 0.1) 50%,
+      transparent 100%
+    );
+  } */
+
+  .game-card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.2),
+      0 10px 20px rgba(255, 51, 102, 0.2);
+  }
+
+  .game-card:hover::before {
+    @apply opacity-100;
+  }
+
+  .game-button {
+    @apply relative overflow-hidden transition-all duration-300 text-lg font-bold px-8 py-3 rounded-2xl
+           bg-gradient-to-r from-rose-500 to-rose-600 hover:from-rose-600 hover:to-rose-700 
+           text-white transform hover:scale-[1.005];
+    box-shadow:
+      0 2px 0 rgba(0, 0, 0, 0.2),
+      0 0 20px rgba(255, 51, 102, 0.5);
+  }
+
+  .game-button::before {
+    content: '';
+    @apply absolute inset-0 opacity-0 transition-opacity duration-300;
+    background: linear-gradient(
+      45deg,
+      transparent 0%,
+      rgba(255, 255, 255, 0.2) 50%,
+      transparent 100%
+    );
+  }
+
+  .game-button:hover::before {
+    @apply opacity-100;
+  }
+
+  .chat-bubble {
+    @apply relative transition-all duration-300 rounded-3xl p-6;
+  }
+
+  .chat-bubble-user {
+    @apply bg-gradient-to-br from-rose-500/15 to-rose-500/5 
+           border border-rose-500/20 text-white rounded-tr-none;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 51, 102, 0.2),
+      0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .chat-bubble-ai {
+    @apply bg-zinc-800/80 text-zinc-300 rounded-tl-none backdrop-blur-sm;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .chat-bubble-success {
+    @apply bg-gradient-to-br from-emerald-400/15 to-emerald-400/5 
+    border border-emerald-500/20 text-white rounded-tr-none;
+    box-shadow:
+      inset 0 0 0 1px rgba(52, 211, 153, 0.1),
+      0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-panel {
+    @apply backdrop-blur-md bg-zinc-900/80 border border-zinc-800/50 rounded-3xl;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .glass-panel-chat {
+    @apply backdrop-blur-md bg-zinc-900/80 border border-zinc-800/50 rounded-3xl;
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1),
+      0 -4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  .neon-glow {
+    text-shadow: 0 0 10px rgba(255, 51, 102, 0.5);
+  }
+
+  .neon-border {
+    box-shadow:
+      inset 0 0 0 1px rgba(255, 51, 102, 0.3),
+      0 0 10px rgba(255, 51, 102, 0.5);
+  }
+
+  .shine-animation {
+    background-size: 200% auto;
+    animation: shine 8s linear infinite;
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+@keyframes shine {
+  to {
+    background-position: 200% center;
+  }
+}
+
+@keyframes spin-slow {
+  from {
+    transform: translate(-50%, -50%) rotate(0deg);
+  }
+  to {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+
+@keyframes beam {
+  from {
+    transform: scaleX(1) rotate(var(--rotation, 0deg));
+    opacity: 0.8;
+  }
+  to {
+    transform: scaleX(1.2) rotate(var(--rotation, 0deg));
+    opacity: 0.4;
+  }
+}
+
+.float-animation {
+  animation: float 3s ease-in-out infinite;
+}
+
+.pulse-animation {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.shine-animation {
+  animation: shine 2s linear infinite;
+}

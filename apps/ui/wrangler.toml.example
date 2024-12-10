@@ -1,0 +1,30 @@
+main = ".worker-next/index.mjs"
+name = "gigabrain"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+assets = { directory = ".worker-next/assets", binding = "ASSETS" }
+
+[env.devnet]
+route = { pattern = "dev.gigabrain.so", custom_domain = true }
+
+[env.devnet.vars]
+NEXT_PUBLIC_IS_PROD = false
+NEXT_PUBLIC_SUPABASE_URL = "https://uqgkinfbrokudxzyddtu.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InVxZ2tpbmZicm9rdWR4enlkZHR1Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzMzNzY0MjIsImV4cCI6MjA0ODk1MjQyMn0.viC1oShHflhsdHQh91MmvwLlgb-2PW8SMFrFofbG6i8"
+NEXT_PUBLIC_RPC_URL = "https://melisenda-0v5dh0-fast-devnet.helius-rpc.com"
+NEXT_PUBLIC_GIGA_MINT = "6WWfNkG79HeF4EYXvjmAio6hUCji3ZUU3jrYfdZcjEwa"
+NEXT_PUBLIC_GIGA_PROGRAM = "CzwhX7PRyfdk8xGw2Wo4G8e7JtwQcatd42Do7AW5Fk2c"
+
+[env.mainnet]
+route = { pattern = "www.gigabrain.so", custom_domain = true }
+
+[env.mainnet.vars]
+NEXT_PUBLIC_IS_PROD = true
+NEXT_PUBLIC_SUPABASE_URL = "https://vjryyxgkqhkgzrrvvrvk.supabase.co"
+NEXT_PUBLIC_SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InZqcnl5eGdrcWhrZ3pycnZ2cnZrIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzYwOTYzNzcsImV4cCI6MjA1MTY3MjM3N30.9A1mehIXyjKAKIr1C-cEdvtFZWmMQpemuXrMnqDTS9s"
+NEXT_PUBLIC_RPC_URL = "https://helli-5i3tc6-fast-mainnet.helius-rpc.com"
+NEXT_PUBLIC_GIGA_MINT = "GHpAbHZ8MCAXWLdKzxM1ZGhP2U4u1ni5vUcoRSghpump"
+NEXT_PUBLIC_GIGA_PROGRAM = "BicS53JDY6toX3DZwRg6ssRDkz9HxEKW3f4c17gwmwCv"
+
+[build]
+command = "pnpm run build"
