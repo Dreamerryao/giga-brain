@@ -1,0 +1,26 @@
+[Unit]
+Description=GB Telegram Service
+After=network.target
+OnFailure=gb-notify-tg@%n.service
+
+[Service]
+Type=simple
+User=root
+WorkingDirectory=/root/gb/apps/program
+
+# The main command to run
+ExecStart=/bin/bash /root/gb/apps/program/src/scripts/systemd/gb-tg.sh
+
+# Restart configuration
+# Restart=no
+Restart=on-failure
+RestartSec=5
+# StartLimitInterval=200
+# StartLimitBurst=5
+
+# Output handling
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

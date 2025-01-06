@@ -1,0 +1,12 @@
+[Unit]
+Description=Telegram Notification Service for %i
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=/root/gb/apps/program
+EnvironmentFile=/root/gb/apps/program/.env.dev
+ExecStart=/root/gb/apps/program/src/scripts/systemd/gb-notify-tg.sh %i
+
+[Install]
+WantedBy=multi-user.target

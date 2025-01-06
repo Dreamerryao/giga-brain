@@ -9,8 +9,10 @@
     "precommit": "husky"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "husky": "^9.1.7",
     "prettier": "^3.2.5",
+    "tsx": "^4.19.2",
     "turbo": "^2.3.3",
     "typescript": "5.5.4"
   },
