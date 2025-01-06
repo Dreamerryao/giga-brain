@@ -7,7 +7,7 @@ export function sleep(ms: number) {
 export async function retry<T>(
   run: () => Promise<T>,
   confirm: (t: T) => boolean,
-  maxRetries: number = 10,
+  maxRetries: number = 30,
   retryIndex: number = 0,
   delay: number = 5_000
 ) {
