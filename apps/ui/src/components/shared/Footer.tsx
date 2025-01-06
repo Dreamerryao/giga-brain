@@ -79,8 +79,8 @@ const SOCIALS = [
   {
     name: 'GitHub',
     icon: <GithubIcon className='w-4 h-4' />,
-    href: 'https://github.com/giga-brain',
-    enabled: false,
+    href: 'https://github.com/giga-brain-project',
+    enabled: true,
   },
 ];
 
