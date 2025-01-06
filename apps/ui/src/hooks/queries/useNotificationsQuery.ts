@@ -65,5 +65,6 @@ export function useNotificationsQuery() {
       }));
     },
     enabled,
+    refetchInterval: 10_000,
   });
 }
