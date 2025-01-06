@@ -116,7 +116,7 @@ function useMediaQuery(query: string) {
 }
 
 const LAUNCH_DATE = new Date('2025-01-07T10:00:00Z');
-// const LAUNCH_DATE = new Date('2025-01-05T13:44:00Z'); // for testing
+// const LAUNCH_DATE = new Date('2025-01-06T13:32:00Z'); // for testing
 const CONFETTI_DURATION_SEC = 60;
 
 let triggeredConfetti = false;
@@ -144,6 +144,7 @@ function useRelease() {
       }
 
       if (
+        IS_PROD &&
         !triggeredConfetti &&
         0 <= difference &&
         difference <= CONFETTI_DURATION_SEC * 1000

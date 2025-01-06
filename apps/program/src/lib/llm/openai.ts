@@ -1,4 +1,5 @@
-import { ChatMessage } from '../ai/types';
+import { ChatCompletionMessageParam } from 'openai/resources';
+
 import { openai } from '../ai/openai';
 
 import { ModelResponse, PastUserPrompt } from './llm';
@@ -14,7 +15,7 @@ export async function promptLLM({
   latestUserPrompt: string;
   pastUserPrompts: PastUserPrompt[];
 }): Promise<ModelResponse> {
-  const messages: ChatMessage[] = [
+  const messages: ChatCompletionMessageParam[] = [
     {
       role: 'system',
       content: systemPrompt,
@@ -94,21 +95,21 @@ export async function promptLLM({
 
     approve = toolCall.function.name === 'approveTransfer';
 
-    // console.log(
-    //   JSON.stringify(
-    //     [
-    //       ...messages,
-    //       toolCallMessage,
-    //       {
-    //         role: 'tool',
-    //         content: '',
-    //         tool_call_id: toolCallId,
-    //       },
-    //     ],
-    //     null,
-    //     2
-    //   )
-    // );
+    console.log(
+      JSON.stringify(
+        [
+          ...messages,
+          toolCallMessage,
+          {
+            role: 'tool',
+            content: '',
+            tool_call_id: toolCallId,
+          },
+        ],
+        null,
+        2
+      )
+    );
 
     try {
       const args = JSON.parse(toolCall.function.arguments);
@@ -129,7 +130,7 @@ export async function promptLLM({
         },
       ],
     });
-    console.log(JSON.stringify(completion, null, 2));
+    // console.log(JSON.stringify(completion, null, 2));
 
     response = completion.choices?.[0]?.message?.content || response;
   }

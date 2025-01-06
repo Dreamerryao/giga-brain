@@ -7,8 +7,12 @@ export const AVAILABLE_MODELS = [
   },
   {
     company: 'anthropic',
-    models: ['claude-3-5-sonnet-20240620'],
+    models: ['claude-3-5-sonnet-latest'],
   },
+  // {
+  //   company: 'google',
+  //   models: ['gemini-2-flash'],
+  // },
 ];
 
 const LIMITS = {

@@ -1,5 +1,5 @@
 import * as anchor from '@coral-xyz/anchor';
-import { orderBy } from 'lodash';
+import orderBy from 'lodash.orderby';
 
 const MAX_PRIORITY_FEE = 100_000;
 const MIN_PRIORITY_FEE = 100;

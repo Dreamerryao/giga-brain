@@ -3,11 +3,22 @@ import { deserializeTx, serializeTx } from '@repo/lib/src/program/tx';
 import { fromLamports } from '@repo/lib/src/bn';
 
 import { GIGA_MINT, TEST_CREATOR_KEY } from './lib/config';
-import {
-  CRYPTO_GUARD_9000_SYSTEM_PROMPT as systemPrompt,
-  CRYPTO_GUARD_9000_NAME as agentName,
-} from './samples/crypto-guard-9000';
+import * as cryptoGuard9000 from './samples/crypto-guard-9000';
+import * as freysa from './samples/freysa';
+import * as logicalGuard from './samples/logical-guard';
+import * as multiLayerProtection from './samples/multi-layer-protection';
+import * as paranoidGuard from './samples/paranoid-guard';
+import * as sentinel7 from './samples/sentinel-7';
 import { BaseBot } from './lib/bot';
+
+const PROMPTS = [
+  cryptoGuard9000,
+  freysa,
+  logicalGuard,
+  multiLayerProtection,
+  paranoidGuard,
+  sentinel7,
+];
 
 class Bot extends BaseBot {
   static async new() {
@@ -22,12 +33,14 @@ class Bot extends BaseBot {
   async runLogic() {
     const creator = TEST_CREATOR_KEY;
 
-    await this.createPuzzle({
-      creator,
-      name: agentName,
-      prompt: systemPrompt,
-      mint: GIGA_MINT,
-    });
+    for (const prompt of PROMPTS) {
+      await this.createPuzzle({
+        creator,
+        name: prompt.name,
+        prompt: prompt.systemPrompt,
+        mint: GIGA_MINT,
+      });
+    }
   }
 
   async createPuzzle({
