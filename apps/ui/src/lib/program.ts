@@ -2,7 +2,6 @@ import * as anchor from '@coral-xyz/anchor';
 import { BaseGbProgram, IDL } from '@repo/lib/src/program/program';
 import { Gb } from '@repo/lib/src/program/gb';
 import {
-  getKeyFromEnvOrFile,
   getPromptsVerifierKey,
   getProvider,
 } from '@repo/lib/src/program/provider';
@@ -11,8 +10,6 @@ import { toLamports } from '@repo/lib/src/bn';
 import { mintTo } from '@solana/spl-token';
 
 import { GIGA_MINT } from '@/config';
-
-const PROMPTS_VERIFIER_KEY = getKeyFromEnvOrFile('PROMPTS_VERIFIER_KEY');
 
 export class GbProgram extends BaseGbProgram {
   promptsVerifier: anchor.web3.Keypair;
@@ -62,7 +59,7 @@ export class GbProgram extends BaseGbProgram {
     const mint = GIGA_MINT;
     const decimals = await this.getMintDecimals(mint);
     const tokenAccount = (
-      await this.getOrCreateTokenAccount(mint, owner, PROMPTS_VERIFIER_KEY)
+      await this.getOrCreateTokenAccount(mint, owner, this.promptsVerifier)
     ).address;
     const amountLamports = toLamports(amount, decimals);
 
@@ -79,7 +76,7 @@ export class GbProgram extends BaseGbProgram {
         this.promptsVerifier,
         mint,
         tokenAccount,
-        PROMPTS_VERIFIER_KEY, // mint authority
+        this.promptsVerifier, // mint authority
         amountLamports.toNumber(),
         [],
         confirmOpts
