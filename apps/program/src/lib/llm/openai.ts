@@ -77,7 +77,7 @@ export async function promptLLM({
         },
       },
     ],
-    tool_choice: 'required', // Require a tool to be called
+    tool_choice: 'auto',
   });
 
   console.log(JSON.stringify(completion, null, 2));

@@ -72,8 +72,8 @@ export async function promptLLM({
     system: systemPrompt,
     tools: tools,
     tool_choice: {
-      type: 'any', // Require a tool to be called
-      disable_parallel_tool_use: true, // Model will output exactly one tool
+      type: 'auto',
+      disable_parallel_tool_use: true,
     },
     max_tokens: MAX_TOKENS,
   });

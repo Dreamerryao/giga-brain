@@ -1,41 +1,52 @@
+import { readFileSync } from 'fs';
+
 import { Command } from 'commander';
 
 import { MODELS, PastUserPrompt } from '@/lib/llm/llm';
 
-import { systemPrompt as anthropic } from './samples/bonk-anthropic';
-import { systemPrompt as openai } from './samples/roseheart-openai';
 import { userPrompts } from './samples/user-prompts';
+
+const SYSTEM_PROMPTS: Record<string, string> = {
+  roseheart: readPromptFile('./roseheart-openai.txt'),
+};
 
 main().catch(console.error);
 
 async function main() {
-  let llm: string | null = null;
+  let companyName: string | null = null;
+  let systemPromptName: string | null = null;
 
   const program = new Command();
   program
     .description('Test LLM')
-    .argument('<llm>', 'LLM')
-    .action((m) => {
-      llm = m;
+    .argument('<company>', 'Company')
+    .argument('<systemPrompt>', 'System Prompt')
+    .action((company, systemPrompt) => {
+      companyName = company;
+      systemPromptName = systemPrompt;
     });
   program.parse();
-  if (!llm) {
-    throw new Error('LLM is required');
+
+  if (!companyName) {
+    throw new Error('Company is required');
+  }
+  if (!systemPromptName) {
+    throw new Error('System prompt is required');
   }
 
-  const company = MODELS.find((m) => m.company === llm);
+  const company = MODELS.find((m) => m.company === companyName);
   if (!company) {
-    throw new Error('LLM is not supported');
+    throw new Error(`Unknown company: ${companyName}`);
   }
+  const systemPrompt = SYSTEM_PROMPTS[systemPromptName]!;
+  if (!systemPrompt) {
+    throw new Error(`Unknown system prompt: ${systemPromptName}`);
+  }
+
   const {
     fn,
     models: [model],
   } = company;
-
-  const systemPrompt = {
-    openai,
-    anthropic,
-  }[company.company];
 
   const pastUserPrompts: PastUserPrompt[] = [];
 
@@ -65,4 +76,8 @@ async function main() {
     }
     console.log('--------------------------------');
   }
+}
+
+function readPromptFile(path: string) {
+  return readFileSync(`${__dirname}/samples/${path}`, 'utf-8');
 }
