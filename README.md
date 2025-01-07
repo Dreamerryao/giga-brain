@@ -2,6 +2,8 @@
 
 Create AI agents, earn GIGA🧠 & SOL when people fail to break them. Break other people's agents, earn their prize pools.
 
+CA: GHpAbHZ8MCAXWLdKzxM1ZGhP2U4u1ni5vUcoRSghpump
+
 Live at: [gigabrain.so](https://gigabrain.so)
 
 **Technical Overview:**

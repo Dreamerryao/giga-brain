@@ -1,24 +1,13 @@
 import * as anchor from '@coral-xyz/anchor';
 import { deserializeTx, serializeTx } from '@repo/lib/src/program/tx';
 import { fromLamports } from '@repo/lib/src/bn';
+import { Command } from 'commander';
 
 import { GIGA_MINT, TEST_CREATOR_KEY } from './lib/config';
-import * as cryptoGuard9000 from './samples/crypto-guard-9000';
-import * as freysa from './samples/freysa';
-import * as logicalGuard from './samples/logical-guard';
-import * as multiLayerProtection from './samples/multi-layer-protection';
-import * as paranoidGuard from './samples/paranoid-guard';
-import * as sentinel7 from './samples/sentinel-7';
 import { BaseBot } from './lib/bot';
+import { SYSTEM_PROMPTS } from './llm';
 
-const PROMPTS = [
-  cryptoGuard9000,
-  freysa,
-  logicalGuard,
-  multiLayerProtection,
-  paranoidGuard,
-  sentinel7,
-];
+const PROMPTS = [];
 
 class Bot extends BaseBot {
   static async new() {
@@ -33,11 +22,30 @@ class Bot extends BaseBot {
   async runLogic() {
     const creator = TEST_CREATOR_KEY;
 
+    let agentName: string | null = null;
+    const program = new Command();
+    program
+      .description('Create agent')
+      .argument('<agentName>', 'Agent name')
+      .action((agentName_) => {
+        agentName = agentName_;
+      });
+    program.parse();
+
+    if (!agentName) {
+      throw new Error('Agent name is required');
+    }
+
+    const systemPrompt = SYSTEM_PROMPTS[agentName]!;
+    if (!systemPrompt) {
+      throw new Error(`Unknown agent: ${agentName}`);
+    }
+
     for (const prompt of PROMPTS) {
       await this.createPuzzle({
         creator,
-        name: prompt.name,
-        prompt: prompt.systemPrompt,
+        name: agentName,
+        prompt,
         mint: GIGA_MINT,
       });
     }

@@ -6,8 +6,11 @@ import { MODELS, PastUserPrompt } from '@/lib/llm/llm';
 
 import { userPrompts } from './samples/user-prompts';
 
-const SYSTEM_PROMPTS: Record<string, string> = {
+export const SYSTEM_PROMPTS: Record<string, string> = {
   roseheart: readPromptFile('./roseheart-openai.txt'),
+  bonk: readPromptFile('./bonk.txt'),
+  cg9: readPromptFile('./crypto-guard-9000.txt'),
+  anne: readPromptFile('./captain-anne-blackbeard.txt'),
 };
 
 main().catch(console.error);
