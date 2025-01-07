@@ -1,5 +1,3 @@
-'use client';
-
 import { Brain, PlusIcon } from 'lucide-react';
 import Link from 'next/link';
 
@@ -10,7 +8,6 @@ import {
   getLeaderboardRoute,
 } from '@/lib/routes';
 import { IS_PROD } from '@/config';
-import { useUI } from '@/providers/ui';
 
 import { HeaderLink } from './HeaderLink';
 import { WalletButton } from './WalletButton';
@@ -18,10 +15,6 @@ import { Notifications } from './Notifications';
 import { HeaderAirdropButton } from './HeaderAirdropButton';
 
 export function Header() {
-  const {
-    release: { isReleased },
-  } = useUI();
-
   return (
     <header className='border-b border-zinc-800/50 backdrop-blur-sm bg-zinc-950/50 flex w-full fixed justify-center z-[1]'>
       <div className='max-w-7xl w-full px-4 sm:px-6 lg:px-8 py-2 lg:py-4'>
@@ -40,42 +33,38 @@ export function Header() {
               </span>
             </Link>
 
-            {!isReleased ? null : (
-              <>
-                <nav className='hidden lg:flex items-center space-x-6'>
-                  {[
-                    { name: 'Home', href: getHomeRoute() },
-                    { name: 'Leaderboard', href: getLeaderboardRoute() },
-                  ].map(({ name, href }) => (
-                    <HeaderLink key={name} href={href}>
-                      {name}
-                    </HeaderLink>
-                  ))}
-                </nav>
-              </>
-            )}
+            <>
+              <nav className='hidden lg:flex items-center space-x-6'>
+                {[
+                  { name: 'Home', href: getHomeRoute() },
+                  { name: 'Leaderboard', href: getLeaderboardRoute() },
+                ].map(({ name, href }) => (
+                  <HeaderLink key={name} href={href}>
+                    {name}
+                  </HeaderLink>
+                ))}
+              </nav>
+            </>
           </div>
 
           <div className='flex items-center space-x-2 lg:space-x-4'>
-            {!isReleased ? null : (
-              <>
-                <Notifications />
+            <>
+              <Notifications />
 
-                <Link href={getCreateAgentRoute()}>
-                  <Button className='game-button group rounded-2xl h-12'>
-                    <span className='relative z-10 hidden lg:flex items-center'>
-                      Create Agent
-                      <Brain className='w-5 h-5 ml-2 group-hover:rotate-12 transition-transform' />
-                    </span>
-                    <PlusIcon className='size-5 lg:hidden' />
-                  </Button>
-                </Link>
+              <Link href={getCreateAgentRoute()}>
+                <Button className='game-button group rounded-2xl h-12'>
+                  <span className='relative z-10 hidden lg:flex items-center'>
+                    Create Agent
+                    <Brain className='w-5 h-5 ml-2 group-hover:rotate-12 transition-transform' />
+                  </span>
+                  <PlusIcon className='size-5 lg:hidden' />
+                </Button>
+              </Link>
 
-                {IS_PROD ? null : <HeaderAirdropButton />}
+              {IS_PROD ? null : <HeaderAirdropButton />}
 
-                <WalletButton />
-              </>
-            )}
+              <WalletButton />
+            </>
           </div>
         </div>
       </div>

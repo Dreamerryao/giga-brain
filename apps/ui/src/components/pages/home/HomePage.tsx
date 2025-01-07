@@ -1,7 +1,5 @@
-'use client';
-
 import { Brain, Target, Rocket } from 'lucide-react';
-import { Suspense, useEffect } from 'react';
+import { Suspense } from 'react';
 
 import { Agents } from '@/components/pages/home/Agents';
 import {
@@ -11,23 +9,9 @@ import {
 import { cn } from '@/lib/utils';
 import { Stats } from '@/components/pages/home/Stats';
 import { TokenSection } from '@/components/pages/home/TokenSection';
-import { useUI } from '@/providers/ui';
 
-import { ComingSoon } from './ComingSoon/ComingSoon';
-
-export function HomePageOrComingSoon() {
-  const { release } = useUI();
-
-  useEffect(() => {
-    const pageLoader = document.getElementById('page-loader');
-    if (pageLoader) {
-      pageLoader.style.display = 'none';
-    }
-  }, []);
-
-  return !release.isReleased ? (
-    <ComingSoon />
-  ) : (
+export function HomePageInner() {
+  return (
     <div className='space-y-16'>
       {/* Hero Section */}
       <Section className='relative overflow-hidden rounded-3xl bg-gradient-to-br from-zinc-900 to-zinc-950 border border-zinc-800'>
