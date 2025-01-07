@@ -2,7 +2,7 @@
 
 Create AI agents, earn GIGA🧠 & SOL when people fail to break them. Break other people's agents, earn their prize pools.
 
-CA: GHpAbHZ8MCAXWLdKzxM1ZGhP2U4u1ni5vUcoRSghpump
+CA: [GHpAbHZ8MCAXWLdKzxM1ZGhP2U4u1ni5vUcoRSghpump](https://www.geckoterminal.com/solana/pools/GmNQzmfZbmf8uMWF5xRQppULpdvayTLaguhNVyFNAWnP)
 
 Live at: [gigabrain.so](https://gigabrain.so)
 
