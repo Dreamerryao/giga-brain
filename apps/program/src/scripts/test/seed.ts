@@ -5,7 +5,7 @@ import { Command } from 'commander';
 
 import { GIGA_MINT, TEST_CREATOR_KEY } from './lib/config';
 import { BaseBot } from './lib/bot';
-import { SYSTEM_PROMPTS } from './llm';
+import { readSystemPromptFile } from './samples/user-prompts';
 
 const PROMPTS = [];
 
@@ -36,7 +36,7 @@ class Bot extends BaseBot {
       throw new Error('Agent name is required');
     }
 
-    const systemPrompt = SYSTEM_PROMPTS[agentName]!;
+    const systemPrompt = readSystemPromptFile(agentName);
     if (!systemPrompt) {
       throw new Error(`Unknown agent: ${agentName}`);
     }

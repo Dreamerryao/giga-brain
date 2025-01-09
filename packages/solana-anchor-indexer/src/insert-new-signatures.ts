@@ -1,36 +1,11 @@
 import * as anchor from '@coral-xyz/anchor';
 import { sql } from 'drizzle-orm';
 
-import { TxnProcessState, Db, TxnsTable, Logger } from './types';
+import { TxnProcessState } from './types';
 import { DB_BATCH_SIZE, TX_QUERY_LIMIT } from './constants';
+import { BaseIndexer } from './base-indexer';
 
-export class InsertNewSignatures {
-  pubKey: anchor.web3.PublicKey;
-  provider: anchor.Provider;
-  db: Db;
-  txnsTable: TxnsTable;
-  logger: Logger;
-
-  constructor({
-    pubKey,
-    provider,
-    db,
-    txnsTable,
-    logger,
-  }: {
-    pubKey: anchor.web3.PublicKey;
-    provider: anchor.Provider;
-    db: Db;
-    txnsTable: TxnsTable;
-    logger: Logger;
-  }) {
-    this.provider = provider;
-    this.pubKey = pubKey;
-    this.db = db;
-    this.txnsTable = txnsTable;
-    this.logger = logger;
-  }
-
+export class InsertNewSignatures extends BaseIndexer {
   async exec(): Promise<void> {
     this.logger.debug('Initializing new signature insertion');
 

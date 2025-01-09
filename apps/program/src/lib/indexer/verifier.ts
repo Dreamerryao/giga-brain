@@ -3,7 +3,7 @@ import { eq, and, asc, isNotNull } from 'drizzle-orm';
 import {
   type ExecEventFnOpts,
   type ExecPartiallyDecodedIxFnOpts,
-} from 'anchor-indexer/src';
+} from 'solana-anchor-indexer/src';
 import { utils as libLLM } from '@repo/lib/src/llm';
 
 import { utils as programLLM } from '@/lib/llm/llm';

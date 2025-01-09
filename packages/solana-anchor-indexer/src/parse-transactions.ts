@@ -2,6 +2,7 @@ import * as anchor from '@coral-xyz/anchor';
 import isNil from 'lodash.isnil';
 import { and, eq } from 'drizzle-orm';
 
+import { BaseIndexer } from './base-indexer';
 import {
   TxnProcessState,
   DecodedProgramEvent,
@@ -10,12 +11,6 @@ import {
   InputProgramEvents,
   InputProgramParsedIxs,
   InputProgramPartiallyDecodedIxs,
-  Db,
-  TxnsTable,
-  Logger,
-  ExecParsedIxFn,
-  ExecEventFn,
-  ExecPartiallyDecodedIxFn,
 } from './types';
 import { DB_BATCH_SIZE } from './constants';
 
@@ -30,52 +25,7 @@ type Tx = {
   data: string;
 };
 
-export class ProcessTransactions {
-  pubKey: anchor.web3.PublicKey;
-  programs: Map<string, anchor.Program>;
-  execParsedIx: ExecParsedIxFn;
-  execPartiallyDecodedIx: ExecPartiallyDecodedIxFn;
-  execEvent: ExecEventFn;
-  provider: anchor.Provider;
-  db: Db;
-  txnsTable: TxnsTable;
-  logger: Logger;
-  constructor({
-    provider,
-    pubKey,
-    programs,
-    execParsedIx,
-    execPartiallyDecodedIx,
-    execEvent,
-    db,
-    txnsTable,
-    logger,
-  }: {
-    pubKey: anchor.web3.PublicKey;
-    programs: Map<string, anchor.Idl>;
-    execParsedIx: ExecParsedIxFn;
-    execPartiallyDecodedIx: ExecPartiallyDecodedIxFn;
-    execEvent: ExecEventFn;
-    provider: anchor.Provider;
-    db: Db;
-    txnsTable: TxnsTable;
-    logger: Logger;
-  }) {
-    this.provider = provider;
-    this.pubKey = pubKey;
-    this.programs = new Map(
-      [...programs].map(([programId, idl]) => {
-        return [programId, new anchor.Program(idl)];
-      })
-    );
-    this.execParsedIx = execParsedIx;
-    this.execPartiallyDecodedIx = execPartiallyDecodedIx;
-    this.execEvent = execEvent;
-    this.db = db;
-    this.txnsTable = txnsTable;
-    this.logger = logger;
-  }
-
+export class ProcessTransactions extends BaseIndexer {
   async exec(): Promise<boolean> {
     const { txs } = await this.getParsableTransactions();
     if (!txs.length) {

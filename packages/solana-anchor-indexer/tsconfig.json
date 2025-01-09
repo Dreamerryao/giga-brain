@@ -24,13 +24,9 @@
     },
   },
   "include": [
-    "src",
-    "tests",
-    "drizzle.config.ts",
+    "src"
   ],
   "exclude": [
-    "migrations",
-    "node_modules",
-    "supabase"
+    "node_modules"
   ]
 }

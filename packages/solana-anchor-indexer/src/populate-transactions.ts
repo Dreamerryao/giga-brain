@@ -2,14 +2,12 @@ import * as anchor from '@coral-xyz/anchor';
 import chunk from 'lodash.chunk';
 import { and, eq } from 'drizzle-orm';
 
+import { BaseIndexer } from './base-indexer';
 import {
   TxnProcessState,
   InputProgramEvents,
   InputProgramParsedIx,
   InputProgramPartiallyDecodedIx,
-  Db,
-  TxnsTable,
-  Logger,
 } from './types';
 import { DB_BATCH_SIZE } from './constants';
 import { sleep } from './utils';
@@ -17,32 +15,7 @@ import { sleep } from './utils';
 const SOL_PARALLEL_TXNS_LIMIT = 90; // quicknode plan limit is 100 req/s
 const SLEEP_DURATION = 600;
 
-export class PopulateTransactions {
-  pubKey: anchor.web3.PublicKey;
-  provider: anchor.Provider;
-  db: Db;
-  txnsTable: TxnsTable;
-  logger: Logger;
-  constructor({
-    pubKey,
-    provider,
-    db,
-    txnsTable,
-    logger,
-  }: {
-    pubKey: anchor.web3.PublicKey;
-    provider: anchor.Provider;
-    db: Db;
-    txnsTable: TxnsTable;
-    logger: Logger;
-  }) {
-    this.provider = provider;
-    this.pubKey = pubKey;
-    this.db = db;
-    this.txnsTable = txnsTable;
-    this.logger = logger;
-  }
-
+export class PopulateTransactions extends BaseIndexer {
   async exec(): Promise<void> {
     const signatures = await this.getUnpopulatedSignatures();
     if (signatures.length === 0) {

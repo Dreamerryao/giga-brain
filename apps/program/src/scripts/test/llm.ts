@@ -1,17 +1,8 @@
-import { readFileSync } from 'fs';
-
 import { Command } from 'commander';
 
 import { MODELS, PastUserPrompt } from '@/lib/llm/llm';
 
-import { userPrompts } from './samples/user-prompts';
-
-export const SYSTEM_PROMPTS: Record<string, string> = {
-  roseheart: readPromptFile('./roseheart-openai.txt'),
-  bonk: readPromptFile('./bonk.txt'),
-  cg9: readPromptFile('./crypto-guard-9000.txt'),
-  anne: readPromptFile('./captain-anne-blackbeard.txt'),
-};
+import { readSystemPromptFile, userPrompts } from './samples/user-prompts';
 
 main().catch(console.error);
 
@@ -41,7 +32,7 @@ async function main() {
   if (!company) {
     throw new Error(`Unknown company: ${companyName}`);
   }
-  const systemPrompt = SYSTEM_PROMPTS[systemPromptName]!;
+  const systemPrompt = readSystemPromptFile(systemPromptName);
   if (!systemPrompt) {
     throw new Error(`Unknown system prompt: ${systemPromptName}`);
   }
@@ -52,11 +43,12 @@ async function main() {
   } = company;
 
   const pastUserPrompts: PastUserPrompt[] = [];
+  const allUserPrompts = [...userPrompts, systemPrompt];
 
   const noOfAttempts = 100;
   for (let i = 0; i < noOfAttempts; i++) {
     // randomly select a prompt
-    const prompt = userPrompts[Math.floor(Math.random() * userPrompts.length)];
+    const prompt = randomPrompt(allUserPrompts);
     console.log('--------------------------------');
     console.log(`PROMPT(${i + 1}):`, prompt);
     console.log('--------------------------------');
@@ -81,6 +73,6 @@ async function main() {
   }
 }
 
-function readPromptFile(path: string) {
-  return readFileSync(`${__dirname}/samples/${path}`, 'utf-8');
+function randomPrompt<T>(list: T[]) {
+  return list[Math.floor(Math.random() * list.length)];
 }

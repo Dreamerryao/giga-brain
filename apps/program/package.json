@@ -1,4 +1,6 @@
 {
+  "name": "program",
+  "version": "0.0.1",
   "license": "ISC",
   "scripts": {
     "lint": "eslint . --ext ts,.tsx --fix && tsc --pretty --noEmit"
@@ -10,7 +12,7 @@
     "@noble/hashes": "^1.6.1",
     "@repo/lib": "workspace:*",
     "@solana/spl-token": "^0.4.9",
-    "anchor-indexer": "workspace:*",
+    "solana-anchor-indexer": "workspace:*",
     "bignumber.js": "^9.0.1",
     "commander": "^12.1.0",
     "drizzle-kit": "^0.29.0",
