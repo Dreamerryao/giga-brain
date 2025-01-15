@@ -160,7 +160,6 @@ pub struct CreatePuzzleToken<'info> {
     TokenAccount>>,
 
     #[account(
-        //  init_if_needed,
         init,
         payer = creator,
         seeds = [

@@ -6,7 +6,7 @@ import {
   type ExecPartiallyDecodedIxFnOpts,
   indexAccount,
   TxnsTable,
-} from 'solana-anchor-indexer/src';
+} from 'solana-anchor-indexer';
 
 import { GbProgram } from '@/lib/program/program';
 import { db as drizzleDb } from '@/db';

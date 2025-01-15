@@ -12,7 +12,7 @@ import {
   pgEnum,
   primaryKey,
 } from 'drizzle-orm/pg-core';
-import { createTxnsTableSchema } from 'solana-anchor-indexer/src';
+import { createTxnsTableSchema } from 'solana-anchor-indexer';
 
 export type PuzzleStatus =
   | 'Active'

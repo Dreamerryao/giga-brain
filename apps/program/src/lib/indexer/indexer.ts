@@ -4,7 +4,7 @@ import { NATIVE_MINT } from '@solana/spl-token';
 import {
   type ExecEventFnOpts,
   type ExecPartiallyDecodedIxFnOpts,
-} from 'solana-anchor-indexer/src';
+} from 'solana-anchor-indexer';
 
 import { GbProgram } from '@/lib/program/program';
 import { db as drizzleDb } from '@/db';
