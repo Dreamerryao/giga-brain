@@ -8,7 +8,7 @@ import {
 } from '@/components/pages/home/HeroButtons';
 import { cn } from '@/lib/utils';
 import { Stats } from '@/components/pages/home/Stats';
-import { TokenSection } from '@/components/pages/home/TokenSection';
+// import { TokenSection } from '@/components/pages/home/TokenSection';
 
 export function HomePageInner() {
   return (
@@ -60,9 +60,9 @@ export function HomePageInner() {
         </Suspense>
       </Section>
 
-      <Section>
+      {/* <Section>
         <TokenSection />
-      </Section>
+      </Section> */}
 
       {/* Features Grid */}
       <Section className='space-y-8'>

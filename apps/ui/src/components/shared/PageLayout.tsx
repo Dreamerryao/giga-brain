@@ -3,6 +3,7 @@ import { PropsWithChildren } from 'react';
 import { cn } from '@/lib/utils';
 
 import { Footer } from './Footer';
+import { HEADER_HEIGHT } from './Header/Header';
 
 export function PageLayout({
   children,
@@ -15,11 +16,14 @@ export function PageLayout({
     <>
       <main
         className={cn(
-          'relative max-w-7xl px-4 sm:px-6 lg:px-8 pt-24 flex flex-col flex-1 w-full',
+          'relative max-w-7xl px-4 sm:px-6 lg:px-8 flex flex-col flex-1 w-full',
           {
             'pb-8': !!footer,
           }
         )}
+        style={{
+          paddingTop: HEADER_HEIGHT,
+        }}
       >
         {children}
       </main>
